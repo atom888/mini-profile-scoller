@@ -27,6 +27,9 @@ const data = [
 
 const profiles = profileIterator(data);
 
+// Call first profile
+nextProfile();
+
 // Next Event
 document.getElementById('next').addEventListener('click', nextProfile);
 
@@ -34,6 +37,7 @@ document.getElementById('next').addEventListener('click', nextProfile);
 function nextProfile() {
     const currentProfile = profiles.next().value;
 
+    if(currentProfile !== undefined) {
     document.getElementById('profileDisplay').innerHTML = `
         <ul class="list-group">
             <li class="list-group-item">Name: ${currentProfile.name}</li>
@@ -44,6 +48,10 @@ function nextProfile() {
     `;
 
     document.getElementById('imageDisplay').innerHTML = `<img src="${currentProfile.image}">`;
+    } else {
+        // No more profiles
+        window.location.reload();
+    }
 } 
 
 // Profile Iterator
